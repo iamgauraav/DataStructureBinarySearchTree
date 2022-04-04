@@ -15,6 +15,7 @@ namespace DSBinarySearchTree
         int leftCount = 0, rightCount = 0;
         bool result = false;
 
+        //method for inserting element in binary search tree
         public void Insert(T item)
         {
             T currentNodeValue = this.NodeData;
@@ -34,6 +35,33 @@ namespace DSBinarySearchTree
             }
         }
 
+        //method for search node in BST
+        public bool Search(T element, BinarySearchTree<T> node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            if (node.NodeData.Equals(element))
+            {
+                Console.WriteLine("Found the element in BST" + " " + node.NodeData);
+                result = true;
+            }
+            //else
+            //{
+            //    Console.WriteLine("Current element in BST is {0}", node.RootNode);
+            //}
+            if (element.CompareTo(node.NodeData) < 0)
+            {
+                Search(element, node.LeftTree);
+            }
+            if (element.CompareTo(node.NodeData) > 0)
+            {
+                Search(element, node.RightTree);
+            }
+            return result;
+        }
+
         public void Display()
         {
             if (this.LeftTree != null)
@@ -48,10 +76,14 @@ namespace DSBinarySearchTree
                 this.RightTree.Display();
             }
         }
+
+        //method to give of the binary search tree 
         public void GetSize()
         {
             Console.WriteLine("Size"+" "+(1 + this.leftCount + this.rightCount));
         }
+
+        // 
         public bool IfExists(T element, BinarySearchTree<T> node)
         {
             if (node == null)
